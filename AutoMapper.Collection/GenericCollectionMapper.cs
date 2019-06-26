@@ -10,6 +10,9 @@ using System.Reflection;
 
 namespace Etx.Collection.Mapper
 {
+    /// <summary>
+    /// This mapper is injected in automapper's mapping pipeline to overrid enumerable mappings and does the job in a more smarter way. This class is not intended to be used directly from outside of this library.
+    /// </summary>
     public class GenericCollectionMapper<TSourceItem, TDestinationItem> : EnumerableMapperBase, IConfigurationObjectMapper
     {
         private readonly Func<TSourceItem, object> _sourceKeySelector;
@@ -22,7 +25,6 @@ namespace Etx.Collection.Mapper
             _sourceKeySelector = sourceKeySelector;
             _destinationKeySelector = destinationKeySelector;
         }
-
         public TDestination Map<TSource, ITSourceItem, TDestination, ITDestinationItem>(TSource source, TDestination destination, ResolutionContext context)
            where TSource : IEnumerable<ITSourceItem>
            where TDestination : ICollection<ITDestinationItem>
